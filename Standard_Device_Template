@@ -1,0 +1,10 @@
+conf t
+username carter password cisco
+username carter privilege 15
+Hostname carter
+line vty 0 15
+login local
+transport input all
+ip domain-name ccieautomation.com
+crypto key generate rsa
+1024

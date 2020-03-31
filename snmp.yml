@@ -1,0 +1,24 @@
+---
+- name: SNMP
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars: 
+    ansible_python_interpreter: /usr/bin/python3
+    cli: 
+      username: carter
+      password: cisco
+  
+  tasks: 
+    - name: Add SNMP configs
+      ios_config: 
+        authorize: yes
+        provider: "{{ cli }}"
+        lines:
+          - snmp-server community clo rw
+          - snmp-server community cat ro 
+      
+      register: print_snmp_output
+    
+    - debug: vars=print_snmp_output
